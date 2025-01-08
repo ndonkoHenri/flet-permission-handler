@@ -36,12 +36,12 @@ def main(page: ft.Page):
     page.add(
         ft.OutlinedButton(
             "Check Microphone Permission",
-            data=ft.PermissionType.MICROPHONE,
+            data=fph.PermissionType.MICROPHONE,
             on_click=check_permission,
         ),
         ft.OutlinedButton(
             "Request Microphone Permission",
-            data=ft.PermissionType.MICROPHONE,
+            data=fph.PermissionType.MICROPHONE,
             on_click=request_permission,
         ),
         ft.OutlinedButton(

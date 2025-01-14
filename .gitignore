@@ -1,3 +1,5 @@
-
-.DS_Store
-examples/permission_handler_example/uv.lock
+*.egg-info/
+build/
+develop-eggs/
+dist/
+.DS_store

@@ -4,72 +4,43 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'utils/permission_handler.dart';
 
-class PermissionHandlerControl extends StatefulWidget {
-  final Control? parent;
-  final Control control;
-  final FletControlBackend backend;
-
-  const PermissionHandlerControl(
-      {super.key,
-      required this.parent,
-      required this.control,
-      required this.backend});
+class PermissionHandlerService extends FletService {
+  PermissionHandlerService({required super.control})
 
   @override
-  State<PermissionHandlerControl> createState() =>
-      _PermissionHandlerControlState();
-}
-
-class _PermissionHandlerControlState extends State<PermissionHandlerControl>
-    with FletStoreMixin {
-  @override
-  void initState() {
-    debugPrint("PermissionHandler.initState($hashCode)");
-    widget.control.onRemove.clear();
-    widget.control.onRemove.add(_onRemove);
-    super.initState();
+  void init() {
+    super.init();
+    debugPrint("PermissionHandler(${control.id}).init: ${control.properties}");
+    control.addInvokeMethodListener(_invokeMethod);
   }
 
-  void _onRemove() {
-    debugPrint("PermissionHandler.remove($hashCode)");
-    widget.backend.unsubscribeMethods(widget.control.id);
-  }
-
-  @override
-  void deactivate() {
-    debugPrint("PermissionHandler.deactivate($hashCode)");
-    super.deactivate();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    debugPrint("PermissionHandler build: ${widget.control.id}");
-
-    () async {
-      widget.backend.subscribeMethods(widget.control.id,
-          (methodName, args) async {
-        switch (methodName) {
-          case "check_permission":
-            return await parsePermission(args['of'])?.status.then((value) {
-              debugPrint("PermissionHandler.check_permission: $value");
-              return value.name;
-            });
-          case "request_permission":
-            var p = parsePermission(args['of']);
-            if (p != null) {
-              Future<PermissionStatus> permissionStatus = p.request();
-              return await permissionStatus.then((value) async {
-                return value.name;
-              });
-            }
-            break;
-          case "open_app_settings":
-            return await openAppSettings().then((value) => value.toString());
+  Future<dynamic> _invokeMethod(String name, dynamic args) async {
+    debugPrint("PermissionHandler.$name($args)");
+    switch (name) {
+      case "check_permission":
+        return await parsePermission(args['type'])?.status.then((value) {
+          return value.name;
+        });
+      case "request_permission":
+        var type = parsePermission(args['type']);
+        if (type != null) {
+          Future<PermissionStatus> permissionStatus = type.request();
+          return await permissionStatus.then((value) async {
+            return value.name;
+          });
         }
-        return null;
-      });
-    }();
+        break;
+      case "open_app_settings":
+        return await openAppSettings();
+      default:
+        throw Exception("Unknown PermissionHandler method: $name");
+    }
+  }
 
-    return const SizedBox.shrink();
+  @override
+  void dispose() {
+    debugPrint("PermissionHandler(${control.id}).dispose()");
+    control.removeInvokeMethodListener(_invokeMethod);
+    super.dispose();
   }
 }

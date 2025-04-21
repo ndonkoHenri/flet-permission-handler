@@ -1,5 +1,6 @@
-from flet_permission_handler.permission_handler import (
-    PermissionHandler,
+from .permission_handler import PermissionHandler
+
+from .types import (
     PermissionStatus,
     PermissionType,
 )

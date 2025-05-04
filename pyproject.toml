@@ -6,12 +6,10 @@ readme = "README.md"
 authors = [
     { name = "Flet contributors", email = "hello@flet.dev" }
 ]
-classifiers = [
-  "License :: OSI Approved :: Apache Software License",
-]
-requires-python = ">=3.9"
+license = "Apache-2.0"
+requires-python = ">=3.10"
 dependencies = [
-    "flet>=0.70.0",
+    "flet,
 ]
 
 [project.urls]
@@ -25,11 +23,15 @@ Issues = "https://github.com/flet-dev/flet-permission-handler/issues"
 
 [tool.uv]
 dev-dependencies = [
-    "flet[all]>=0.70.0",
+    "flet",
+    "flet-cli",
+    "flet-desktop",
+    "flet-web",
+    #"mkdocs",
+    #"mkdocs-material",
+    #"mkdocstrings[python]"
+    "pre-commit>=4.2.0",
 ]
-
-[tool.setuptools]
-license-files = []
 
 [build-system]
 requires = ["setuptools"]

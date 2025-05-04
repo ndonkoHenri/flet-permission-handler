@@ -5,7 +5,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'utils/permission_handler.dart';
 
 class PermissionHandlerService extends FletService {
-  PermissionHandlerService({required super.control})
+  PermissionHandlerService({required super.control});
 
   @override
   void init() {

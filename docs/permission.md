@@ -1,0 +1,1 @@
+::: flet_permission_handler.types.Permission

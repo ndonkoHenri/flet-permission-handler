@@ -23,13 +23,17 @@ Issues = "https://github.com/flet-dev/flet-permission-handler/issues"
 
 [tool.uv]
 dev-dependencies = [
-    "flet",
-    "flet-cli",
-    "flet-desktop",
-    "flet-web",
-    #"mkdocs",
-    #"mkdocs-material",
-    #"mkdocstrings[python]"
+    # "flet",
+    # "flet-cli",
+    # "flet-desktop",
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "mike",
+    "markdown>=3.6",
+    "pymdown-extensions",
+    "mkdocs-glightbox",
+    "pygments>=2.16",
     "pre-commit>=4.2.0",
 ]
 

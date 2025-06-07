@@ -10,39 +10,51 @@ __all__ = ["PermissionHandler"]
 @ft.control("PermissionHandler")
 class PermissionHandler(ft.Service):
     """
-    A control that allows you check and request permission from your device.
-    This control is non-visual and should be added to `page.services` list.
+    Manages permissions for the application.
 
-    Note: This control is currently only supported on Android, iOS, Windows, and Web platforms.
+    This control is non-visual and should be added to `Page.services` list.
+
+    Note:
+        Currently only supported on Android, iOS, Windows, and Web platforms.
     """
 
     def before_update(self):
         super().before_update()
-        self.__validate_platform()
 
-    def __validate_platform(self):
-        """Validates if the current platform supports the PermissionHandler."""
-        if not (self.page.web or self.page.platform in [
-            ft.PagePlatform.ANDROID,
-            ft.PagePlatform.IOS,
-            ft.PagePlatform.WINDOWS,
-        ]):
+        # validate platform
+        if not (
+            self.page.web
+            or self.page.platform
+            in [
+                ft.PagePlatform.ANDROID,
+                ft.PagePlatform.IOS,
+                ft.PagePlatform.WINDOWS,
+            ]
+        ):
             raise ft.FletUnimplementedPlatformEception(
                 "PermissionHandler is currently only supported on Android, iOS, Windows, and Web platforms."
             )
 
     async def get_status_async(
-        self, permission: Permission
+        self, permission: Permission, timeout: int = 10
     ) -> Optional[PermissionStatus]:
         """
         Gets the current status of the given `permission`.
 
-        Returns `PermissionStatus` if the status is known, otherwise `None`.
+        Args:
+            permission: The `Permission` to check the status for.
+            timeout: The maximum amount of time (in seconds) to wait for a response.
+
+        Returns:
+            A `PermissionStatus` if the status is known, otherwise `None`.
+
+        Raises:
+            `TimeoutError`: If the request times out.
         """
-        self.__validate_platform()
         status = await self._invoke_method_async(
             "get_status",
-            {"permission": permission}
+            {"permission": permission},
+            timeout=timeout
         )
         return PermissionStatus(status) if status is not None else None
 
@@ -50,12 +62,18 @@ class PermissionHandler(ft.Service):
         self, permission: Permission, timeout: int = 60
     ) -> Optional[PermissionStatus]:
         """
-        Request the user for access to the `permission`.
-        if access hasn't already been granted access before.
+        Request the user for access to the `permission` if access hasn't already been granted access before.
 
-        Returns the new `PermissionStatus`.
+        Args:
+            permission: The `Permission` to request.
+            timeout: The maximum amount of time (in seconds) to wait for a response.
+
+        Returns:
+            The new `PermissionStatus` after the request, or `None` if the request was not successful.
+
+        Raises:
+            `TimeoutError`: If the request times out.
         """
-        self.__validate_platform()
         r = await self._invoke_method_async(
             "request",
             {"permission": permission},
@@ -63,11 +81,17 @@ class PermissionHandler(ft.Service):
         )
         return PermissionStatus(r) if r is not None else None
 
-    async def open_app_settings_async(self) -> bool:
+    async def open_app_settings_async(self, timeout: int = 10) -> bool:
         """
         Opens the app settings page.
 
-        Returns `True` if the app settings page could be opened, otherwise `False`.
+        Args:
+            timeout: The maximum amount of time (in seconds) to wait for a response.
+
+        Returns:
+            `True` if the app settings page could be opened, otherwise `False`.
+
+        Raises:
+            `TimeoutError`: If the request times out.
         """
-        self.__validate_platform()
-        return await self._invoke_method_async("open_app_settings")
+        return await self._invoke_method_async("open_app_settings", timeout=timeout)

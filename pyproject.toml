@@ -21,11 +21,14 @@ Issues = "https://github.com/flet-dev/flet-permission-handler/issues"
 [tool.setuptools.package-data]
 "flutter.flet_permission_handler" = ["**/*"]
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     # "flet",
     # "flet-cli",
     # "flet-desktop",
+    "pre-commit>=4.2.0",
+]
+docs = [
     "mkdocs",
     "mkdocs-material",
     "mkdocstrings[python]",
@@ -34,8 +37,10 @@ dev-dependencies = [
     "pymdown-extensions",
     "mkdocs-glightbox",
     "pygments>=2.16",
-    "pre-commit>=4.2.0",
 ]
+
+[tool.uv]
+default-groups = ["dev"]
 
 [build-system]
 requires = ["setuptools"]

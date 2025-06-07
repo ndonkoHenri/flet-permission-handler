@@ -17,15 +17,15 @@ class PermissionHandlerService extends FletService {
   Future<dynamic> _invokeMethod(String name, dynamic args) async {
     debugPrint("PermissionHandler.$name($args)");
     switch (name) {
-      case "check_permission":
-        return await parsePermission(args['type'])?.status.then((value) {
+      case "get_status":
+        return await parsePermission(args['permission'])?.status.then((value) {
           return value.name;
         });
-      case "request_permission":
-        var type = parsePermission(args['type']);
-        if (type != null) {
-          Future<PermissionStatus> permissionStatus = type.request();
-          return await permissionStatus.then((value) async {
+      case "request":
+        var permission = parsePermission(args['permission']);
+        if (permission != null) {
+          Future<PermissionStatus> status = permission.request();
+          return await status.then((value) async {
             return value.name;
           });
         }

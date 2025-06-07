@@ -11,12 +11,25 @@ __all__ = ["PermissionHandler"]
 class PermissionHandler(ft.Service):
     """
     A control that allows you check and request permission from your device.
-    This control is non-visual and should be added to `page.overlay` list.
+    This control is non-visual and should be added to `page.services` list.
 
-    -----
-
-    Online docs: https://flet.dev/docs/controls/permissionhandler
+    Note: This control is currently only supported on Android, iOS, Windows, and Web platforms.
     """
+
+    def before_update(self):
+        super().before_update()
+        self.__validate_platform()
+
+    def __validate_platform(self):
+        """Validates if the current platform supports the PermissionHandler."""
+        if not (self.page.web or self.page.platform in [
+            ft.PagePlatform.ANDROID,
+            ft.PagePlatform.IOS,
+            ft.PagePlatform.WINDOWS,
+        ]):
+            raise ft.FletUnimplementedPlatformEception(
+                "PermissionHandler is currently only supported on Android, iOS, Windows, and Web platforms."
+            )
 
     async def get_status_async(
         self, permission: Permission
@@ -26,6 +39,7 @@ class PermissionHandler(ft.Service):
 
         Returns `PermissionStatus` if the status is known, otherwise `None`.
         """
+        self.__validate_platform()
         status = await self._invoke_method_async(
             "get_status",
             {"permission": permission}
@@ -33,7 +47,7 @@ class PermissionHandler(ft.Service):
         return PermissionStatus(status) if status is not None else None
 
     async def request_async(
-        self, permission: Permission
+        self, permission: Permission, timeout: int = 60
     ) -> Optional[PermissionStatus]:
         """
         Request the user for access to the `permission`.
@@ -41,9 +55,11 @@ class PermissionHandler(ft.Service):
 
         Returns the new `PermissionStatus`.
         """
+        self.__validate_platform()
         r = await self._invoke_method_async(
             "request",
-            {"permission": permission}
+            {"permission": permission},
+            timeout=timeout
         )
         return PermissionStatus(r) if r is not None else None
 
@@ -53,4 +69,5 @@ class PermissionHandler(ft.Service):
 
         Returns `True` if the app settings page could be opened, otherwise `False`.
         """
+        self.__validate_platform()
         return await self._invoke_method_async("open_app_settings")

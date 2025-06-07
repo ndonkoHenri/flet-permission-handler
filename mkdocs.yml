@@ -1,6 +1,6 @@
 # Project information
 site_name: "flet-permission-handler"
-site_url: https://flet-permission-handler.github.io/docs/
+site_url: https://flet-dev.github.io/flet-permission-handler/
 site_author: Flet Contributors
 site_description: A Flet extension that simplifies working with permissions in your app.
 

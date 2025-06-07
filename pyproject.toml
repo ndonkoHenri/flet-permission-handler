@@ -23,9 +23,6 @@ Issues = "https://github.com/flet-dev/flet-permission-handler/issues"
 
 [dependency-groups]
 dev = [
-    # "flet",
-    # "flet-cli",
-    # "flet-desktop",
     "pre-commit>=4.2.0",
 ]
 docs = [
@@ -38,9 +35,6 @@ docs = [
     "mkdocs-glightbox",
     "pygments>=2.16",
 ]
-
-[tool.uv]
-default-groups = []
 
 [build-system]
 requires = ["setuptools"]

@@ -10,10 +10,10 @@
 
 <br>
 
-<img src="https://img.shields.io/badge/Platform-Windows-blue?logo=windows" alt="Windows">
-<img src="https://img.shields.io/badge/Platform-iOS-lightgrey?logo=apple" alt="iOS">
-<img src="https://img.shields.io/badge/Platform-Android-green?logo=android" alt="Android">
-<img src="https://img.shields.io/badge/Platform-Web-blue?logo=googlechrome" alt="Web">
+![Windows](https://img.shields.io/badge/Platform-Windows-blue?logo=windows)
+![iOS](https://img.shields.io/badge/Platform-iOS-lightgrey?logo=apple)
+![Android](https://img.shields.io/badge/Platform-Android-green?logo=android)
+![Web](https://img.shields.io/badge/Platform-Web-blue?logo=googlechrome)
 
 `flet-permission-handler` is a Flet extension that simplifies working with permissions in your app.
 

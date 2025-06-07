@@ -1,4 +1,4 @@
-name: ci
+name: docs-deployment
 
 on:
   push:
@@ -10,6 +10,10 @@ env:
   UV_SYSTEM_PYTHON: 1
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
+concurrency:
+  group: "gh-pages-deploy"
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -17,7 +21,7 @@ jobs:
   deploy:
     name: Deploy Documentation
     runs-on: ubuntu-latest
-    # if: github.repository == github.event.repository.full_name
+    if: github.repository == github.event.repository.full_name  # only deploy from main repo, not forks
     steps:
       - uses: actions/checkout@v4
 
@@ -34,7 +38,7 @@ jobs:
         with:
           python-version-file: "pyproject.toml"
 
-      - name: Install the project (src layout)
+      - name: Install the project
         run: uv pip install -e .
 
       - name: Install Documentation Dependencies

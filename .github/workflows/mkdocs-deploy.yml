@@ -6,10 +6,6 @@ on:
       - documentation
   workflow_dispatch:
 
-env:
-  # UV_SYSTEM_PYTHON: 1
-  GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
 concurrency:
   group: "gh-pages-deploy"
   cancel-in-progress: false
@@ -25,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Configure Git Credentials
+      - name: Configure Git for mkdocs
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
@@ -39,10 +35,12 @@ jobs:
           python-version-file: "pyproject.toml"
 
       - name: Install the project
-        run: uv pip install -e .
+        run: uv --system pip install -e .
 
-      - name: Install Documentation Dependencies
+      - name: Install docs dependencies
         run: uv pip install --group docs
 
       - name: Deploy to GitHub Pages
         run: uv run mkdocs gh-deploy --force
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}

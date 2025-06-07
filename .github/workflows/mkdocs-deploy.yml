@@ -1,9 +1,9 @@
 name: ci
+
 on:
   push:
     branches:
       - documentation
-
   workflow_dispatch:
 
 env:
@@ -15,34 +15,30 @@ permissions:
 
 jobs:
   deploy:
+    name: Deploy Documentation
     runs-on: ubuntu-latest
-    # if: github.event.repository.fork == false
+    # if: github.repository == github.event.repository.full_name
     steps:
       - uses: actions/checkout@v4
+
       - name: Configure Git Credentials
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-      
-      - name: "Install uv"
+
+      - name: Install uv
         uses: astral-sh/setup-uv@v6
-      
-      - name: "Set up Python"
+
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version-file: "pyproject.toml"
+
       - name: Install the project (src layout)
         run: uv pip install -e .
-      
-      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
-      
-      - uses: actions/cache@v4
-        with:
-          key: mkdocs-material-${{ env.cache_id }}
-          path: .cache 
-          restore-keys: |
-            mkdocs-material-
-      # - run: apt-get install pngquant 
-      - run: uv pip install --group docs
-      - run: uv run mkdocs gh-deploy --force
-  
+
+      - name: Install Documentation Dependencies
+        run: uv pip install --group docs
+
+      - name: Deploy to GitHub Pages
+        run: uv run mkdocs gh-deploy --force

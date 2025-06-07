@@ -4,22 +4,27 @@ on:
   push:
     branches:
       - documentation
-  workflow_dispatch:
+  workflow_dispatch:    # Allow manual trigger from the GitHub Actions UI
 
 concurrency:
-  group: "gh-pages-deploy"
-  cancel-in-progress: false
+  group: "gh-pages-deploy"        # Prevent multiple overlapping deploys
+  cancel-in-progress: false       # Allow in-progress deploys to finish
 
 permissions:
-  contents: write
+  contents: write  # Required to push to the gh-pages branch
+
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}         # Token used by mkdocs for pushing
+  UV_SYSTEM_PYTHON: 1                       # Use system Python interpreter with uv
 
 jobs:
   deploy:
     name: Deploy Documentation
     runs-on: ubuntu-latest
-    if: github.repository == github.event.repository.full_name  # only deploy from main repo, not forks
+    if: github.repository == github.event.repository.full_name  # don't run on forks
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Configure Git for mkdocs
         run: |
@@ -32,15 +37,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version-file: "pyproject.toml"
+          python-version-file: "pyproject.toml"  # Match Python version with project config
 
-      - name: Install the project
-        run: uv --system pip install -e .
-
-      - name: Install docs dependencies
-        run: uv pip install --group docs
+      - name: Install dependencies
+        run: |
+          uv pip install -e .
+          uv pip install --group docs
 
       - name: Deploy to GitHub Pages
         run: uv run mkdocs gh-deploy --force
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}

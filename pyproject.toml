@@ -40,7 +40,7 @@ docs = [
 ]
 
 [tool.uv]
-default-groups = ["dev"]
+default-groups = []
 
 [build-system]
 requires = ["setuptools"]

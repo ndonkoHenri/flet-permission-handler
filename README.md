@@ -1,55 +1,46 @@
-# PermissionHandler control for Flet
+# flet-permission-handler
 
-`PermissionHandler` control for Flet.
+<a href="https://pypi.org/project/flet-permission-handler" target="_blank">
+    <img src="https://img.shields.io/pypi/v/flet-permission-handler?color=%2334D058" alt="Package version">
+</a>
 
-## Usage
+<a href="https://pypi.org/project/flet-permission-handler" target="_blank">
+    <img src="https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fflet-dev%2Fflet-permission-handler%2Frefs%2Fheads%2Fmain%2Fpyproject.toml" alt="Supported Python versions">
+</a>
 
-Add `flet-permission-handler` as dependency (`pyproject.toml` or `requirements.txt`) to your Flet project.
+<br>
 
-## Example
+<img src="https://img.shields.io/badge/Platform-Windows-blue?logo=windows" alt="Windows">
+<img src="https://img.shields.io/badge/Platform-iOS-lightgrey?logo=apple" alt="iOS">
+<img src="https://img.shields.io/badge/Platform-Android-green?logo=android" alt="Android">
+<img src="https://img.shields.io/badge/Platform-Web-blue?logo=googlechrome" alt="Web">
 
-```py
+`flet-permission-handler` is a Flet extension that simplifies working with permissions in your app.
 
-import flet as ft
+It is based on the popular [permission_handler](https://pub.dev/packages/permission_handler) Flutter package
+and brings similar functionality to Flet, including:
 
-import flet_permission_handler as fph
+- Requesting permissions at runtime
+- Checking the current permission status
+- Redirecting users to system settings to manually grant permissions
 
+## Platform Support
 
-def main(page: ft.Page):
-    page.scroll = ft.ScrollMode.ADAPTIVE
-    page.appbar = ft.AppBar(title=ft.Text("PermissionHandler Tests"))
-    ph = fph.PermissionHandler()
-    page.overlay.append(ph)
+| Platform | Supported |
+|----------|:---------:|
+| Windows  |     ✅     |
+| macOS    |     ❌     |
+| Linux    |     ❌     |
+| iOS      |     ✅     |
+| Android  |     ✅     |
+| Web      |     ✅     |
 
-    def check_permission(e):
-        o = ph.check_permission(e.control.data)
-        page.add(ft.Text(f"Checked {e.control.data.name}: {o}"))
+## Setup
 
-    def request_permission(e):
-        o = ph.request_permission(e.control.data)
-        page.add(ft.Text(f"Requested {e.control.data.name}: {o}"))
+- Add `flet-permission-handler` as dependency (`pyproject.toml` or `requirements.txt`) to your Flet project.
 
-    def open_app_settings(e):
-        o = ph.open_app_settings()
-        page.add(ft.Text(f"App Settings: {o}"))
+- Ensure that your app has the necessary [permissions declared](https://flet.dev/docs/publish#permissions).
 
-    page.add(
-        ft.OutlinedButton(
-            "Check Microphone Permission",
-            data=fph.PermissionType.MICROPHONE,
-            on_click=check_permission,
-        ),
-        ft.OutlinedButton(
-            "Request Microphone Permission",
-            data=fph.PermissionType.MICROPHONE,
-            on_click=request_permission,
-        ),
-        ft.OutlinedButton(
-            "Open App Settings",
-            on_click=open_app_settings,
-        ),
-    )
+## Examples
 
-
-ft.app(main)
-```
+For examples, see [this](https://github.com/flet-dev/flet-permission-handler/tree/main/examples)

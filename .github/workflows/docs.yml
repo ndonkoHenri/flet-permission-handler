@@ -11,8 +11,8 @@ on:
       - 'mkdocs.yml'
       - 'pyproject.toml'
       - '.github/workflows/docs.yml'
+      - 'src/flet_permission_handler/**'
       - 'examples/permission_handler_example/src/main.py'
-      - 'src/flet_permission_handler'
 
   workflow_dispatch:    # Allow manual trigger from the GitHub Actions UI
 

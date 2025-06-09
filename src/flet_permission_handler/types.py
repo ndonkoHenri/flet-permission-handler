@@ -7,7 +7,7 @@ __all__ = [
 
 
 class PermissionStatus(Enum):
-    """Defines the state of a [`Permission`][flet_permission_handler.types.Permission]."""
+    """Defines the state of a [`Permission`][..]."""
 
     GRANTED = "granted"
     """
@@ -61,8 +61,10 @@ class PermissionStatus(Enum):
 
 # todo: show how pyproject config for each could look like for each permission (what exactly is needed in manifest, plist, etc.)
 
+
 class Permission(Enum):
     """Defines the permissions which can be checked and requested."""
+
     ACCESS_MEDIA_LOCATION = "accessMediaLocation"
     """
     Permission for accessing the device's media library.
@@ -407,4 +409,3 @@ class Permission(Enum):
     Note:
         Only supported on Android 13+ (API 33+) only.
     """
-

@@ -16,6 +16,7 @@ class PermissionHandler(ft.Service):
 
     Note:
         Currently only supported on Android, iOS, Windows, and Web platforms.
+        An exception will be raised if used on unsupported platforms.
     """
 
     def before_update(self):
@@ -49,12 +50,10 @@ class PermissionHandler(ft.Service):
             A `PermissionStatus` if the status is known, otherwise `None`.
 
         Raises:
-            `TimeoutError`: If the request times out.
+            TimeoutError: If the request times out.
         """
         status = await self._invoke_method_async(
-            "get_status",
-            {"permission": permission},
-            timeout=timeout
+            "get_status", {"permission": permission}, timeout=timeout
         )
         return PermissionStatus(status) if status is not None else None
 
@@ -72,12 +71,10 @@ class PermissionHandler(ft.Service):
             The new `PermissionStatus` after the request, or `None` if the request was not successful.
 
         Raises:
-            `TimeoutError`: If the request times out.
+            TimeoutError: If the request times out.
         """
         r = await self._invoke_method_async(
-            "request",
-            {"permission": permission},
-            timeout=timeout
+            "request", {"permission": permission}, timeout=timeout
         )
         return PermissionStatus(r) if r is not None else None
 
@@ -92,6 +89,6 @@ class PermissionHandler(ft.Service):
             `True` if the app settings page could be opened, otherwise `False`.
 
         Raises:
-            `TimeoutError`: If the request times out.
+            TimeoutError: If the request times out.
         """
         return await self._invoke_method_async("open_app_settings", timeout=timeout)

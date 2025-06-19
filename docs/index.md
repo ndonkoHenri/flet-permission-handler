@@ -26,6 +26,32 @@ This package supports the following platforms:
 | Android  |     ✅     |
 | Web      |     ✅     |
 
+## Usage
+
+### Installation
+
+To install the `flet-permission-handler` package and add it to your project dependencies:
+
+=== "uv"
+
+```bash
+uv add flet-permission-handler
+```
+
+=== "pip"
+
+```bash
+pip install flet-permission-handler
+```
+
+    You will have to manually add this package to your `requirements.txt` or `pyproject.toml`.
+
+=== "poetry"
+
+```bash
+poetry add flet-permission-handler
+```
+
 ## Example
 
 ```python title="main.py"

@@ -33,24 +33,21 @@ This package supports the following platforms:
 To install the `flet-permission-handler` package and add it to your project dependencies:
 
 === "uv"
-
-```bash
-uv add flet-permission-handler
-```
+   ```bash
+   uv add flet-permission-handler
+   ```
 
 === "pip"
-
-```bash
-pip install flet-permission-handler
-```
-
-    You will have to manually add this package to your `requirements.txt` or `pyproject.toml`.
-
+   ```bash
+   pip install flet-permission-handler  # (1)!
+   ```
 === "poetry"
 
-```bash
-poetry add flet-permission-handler
-```
+   ```bash
+   poetry add flet-permission-handler
+   ```
+
+1. After this, you will have to manually add this package to your `requirements.txt` or `pyproject.toml`.
 
 ## Example
 

@@ -16,7 +16,8 @@ class PermissionHandler(ft.Service):
 
     Note:
         Currently only supported on Android, iOS, Windows, and Web platforms.
-        An exception will be raised if used on unsupported platforms.
+    Raises:
+        FletUnsupportedPlatformException: If the platform is not supported.
     """
 
     def before_update(self):
@@ -32,7 +33,7 @@ class PermissionHandler(ft.Service):
                 ft.PagePlatform.WINDOWS,
             ]
         ):
-            raise ft.FletUnimplementedPlatformEception(
+            raise ft.FletUnsupportedPlatformException(
                 "PermissionHandler is currently only supported on Android, iOS, Windows, and Web platforms."
             )
 
@@ -45,10 +46,8 @@ class PermissionHandler(ft.Service):
         Args:
             permission: The `Permission` to check the status for.
             timeout: The maximum amount of time (in seconds) to wait for a response.
-
         Returns:
             A `PermissionStatus` if the status is known, otherwise `None`.
-
         Raises:
             TimeoutError: If the request times out.
         """
@@ -66,10 +65,8 @@ class PermissionHandler(ft.Service):
         Args:
             permission: The `Permission` to request.
             timeout: The maximum amount of time (in seconds) to wait for a response.
-
         Returns:
             The new `PermissionStatus` after the request, or `None` if the request was not successful.
-
         Raises:
             TimeoutError: If the request times out.
         """
@@ -84,10 +81,8 @@ class PermissionHandler(ft.Service):
 
         Args:
             timeout: The maximum amount of time (in seconds) to wait for a response.
-
         Returns:
             `True` if the app settings page could be opened, otherwise `False`.
-
         Raises:
             TimeoutError: If the request times out.
         """

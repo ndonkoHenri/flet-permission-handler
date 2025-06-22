@@ -11,9 +11,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Deployed online documentation: https://flet-dev.github.io/flet-permissionhandler/
 - `PermissionHandler` control new methods: 
-  - `get_status_async`
-  - `request_async`
-  - `open_app_settings_async`
+    - `get_status_async`
+    - `request_async`
+    - `open_app_settings_async`
 
 ### Changed
 
@@ -23,15 +23,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Enum `PermissionType` renamed to `Permission`
 - `PermissionHandler` method `check_permission_async` renamed to `get_status_async`, with parameters changed: 
-  - `of` → `permission` (type: `PermissionType` → `Permission`)
-  - `wait_timeout` → `timeout`
+    - `of` → `permission` (type: `PermissionType` → `Permission`)
+    - `wait_timeout` → `timeout`
 - `PermissionHandler` method `request_permission_async` renamed to `request_async`, with parameters changed: 
-  - `of` → `permission` (type: `PermissionType` → `Permission`)
-  - `wait_timeout` → `timeout`
+    - `of` → `permission` (type: `PermissionType` → `Permission`)
+    - `wait_timeout` → `timeout`
 - `PermissionHandler` method `open_app_settings_async` parameter `wait_timeout` renamed to `timeout` (type: `Optional[float]` → `int`)
 - Removed sync methods from `PermissionHandler`: 
-  - `check_permission` → use `get_status_async` instead
-  - `request_permission` → use `request_async` instead
+    - `check_permission` → use `get_status_async` instead
+    - `request_permission` → use `request_async` instead
   - `open_app_settings` → use `open_app_settings_async` instead
 - `PermissionHandler` must now be added to `Page.services` before being used instead of `Page.overlay`.
 - `PermissionHandler` can now only be used on the following platforms: Windows, iOS, Android, and Web. A `FletUnimplementedPlatformEception` will be raised if used on unsupported platforms.

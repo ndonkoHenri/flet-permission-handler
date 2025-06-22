@@ -5,22 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - 2025-mm-dd
+## [Unreleased] - 2025-06-dd
 
 ## Added
 
-- Deployed online documentation: https://flet-dev.github.io/flet-permission-handler/
+- Deployed online documentation: https://flet-dev.github.io/flet-permissionhandler/
+- `PermissionHandler` control new methods: 
+  - `get_status_async`
+  - `request_async`
+  - `open_app_settings_async`
 
 ### Changed
 
-- **Breaking**: The following methods of `PermissionHandler` have been removed:
-    * `open_app_settings()` → replaced by `open_app_settings_async()`.
-    * `request_permission()` / `request_permission_async()` → replaced by `request_async()`.
-    * `check_permission()` / `check_permission_async()` → replaced by `get_status_async()`.
+- Refactored `PermissionHandler` control to use `@ft.control` dataclass-style definition and switched to `Service` control type
 
-- **Breaking**: The `PermissionType` enum has been renamed to `Permission`.
-- **Breaking**: The `PermissionHandler` class can now only be used on the following platforms: Windows, iOS, Android,
-  and Web. A `FletUnimplementedPlatformEception` will be raised if used on other (unsupported) platforms.
+### Breaking Changes
+
+- Enum `PermissionType` renamed to `Permission`
+- `PermissionHandler` method `check_permission_async` renamed to `get_status_async`, with parameters changed: 
+  - `of` → `permission` (type: `PermissionType` → `Permission`)
+  - `wait_timeout` → `timeout`
+- `PermissionHandler` method `request_permission_async` renamed to `request_async`, with parameters changed: 
+  - `of` → `permission` (type: `PermissionType` → `Permission`)
+  - `wait_timeout` → `timeout`
+- `PermissionHandler` method `open_app_settings_async` parameter `wait_timeout` renamed to `timeout` (type: `Optional[float]` → `int`)
+- Removed sync methods from `PermissionHandler`: 
+  - `check_permission` → use `get_status_async` instead
+  - `request_permission` → use `request_async` instead
+  - `open_app_settings` → use `open_app_settings_async` instead
+- `PermissionHandler` must now be added to `Page.services` before being used instead of `Page.overlay`.
+- `PermissionHandler` can now only be used on the following platforms: Windows, iOS, Android, and Web. A `FletUnimplementedPlatformEception` will be raised if used on unsupported platforms.
 
 ## [0.1.0] - 2025-01-15
 

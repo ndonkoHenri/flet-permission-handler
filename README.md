@@ -1,30 +1,25 @@
 # flet-permission-handler
 
-<a href="https://pypi.org/project/flet-permission-handler" target="_blank">
-    <img src="https://img.shields.io/pypi/v/flet-permission-handler?color=%2334D058" alt="Package version">
-</a>
+[![pypi](https://img.shields.io/pypi/v/flet-permission-handler.svg)](https://pypi.python.org/pypi/flet-permission-handler)
+[![downloads](https://static.pepy.tech/badge/flet-permission-handler/month)](https://pepy.tech/project/flet-permission-handler)
+[![license](https://img.shields.io/github/license/flet-dev/flet-permission-handler.svg)](https://github.com/flet-dev/flet-permission-handler/blob/main/LICENSE)
 
-<a href="https://pypi.org/project/flet-permission-handler" target="_blank">
-    <img src="https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Fflet-dev%2Fflet-permission-handler%2Frefs%2Fheads%2Fmain%2Fpyproject.toml" alt="Supported Python versions">
-</a>
+A [Flet](https://flet.dev) extension that simplifies working with device permissions.
 
-<br>
-
-![Windows](https://img.shields.io/badge/Platform-Windows-blue?logo=windows)
-![iOS](https://img.shields.io/badge/Platform-iOS-lightgrey?logo=apple)
-![Android](https://img.shields.io/badge/Platform-Android-green?logo=android)
-![Web](https://img.shields.io/badge/Platform-Web-blue?logo=googlechrome)
-
-`flet-permission-handler` is a Flet extension that simplifies working with permissions in your app.
-
-It is based on the popular [permission_handler](https://pub.dev/packages/permission_handler) Flutter package
+It is based on the [permission_handler](https://pub.dev/packages/permission_handler) Flutter package
 and brings similar functionality to Flet, including:
 
 - Requesting permissions at runtime
-- Checking the current permission status
+- Checking the current permission status (e.g., granted, denied)
 - Redirecting users to system settings to manually grant permissions
 
+## Documentation
+
+Detailed documentation to this package can be found [here](https://flet-dev.github.io/flet-permission-handler/).
+
 ## Platform Support
+
+This package supports the following platforms:
 
 | Platform | Supported |
 |----------|:---------:|
@@ -35,12 +30,26 @@ and brings similar functionality to Flet, including:
 | Android  |     ✅     |
 | Web      |     ✅     |
 
-## Setup
+## Installation
 
-- Add `flet-permission-handler` as dependency (`pyproject.toml` or `requirements.txt`) to your Flet project.
+To install the `flet-permission-handler` package and add it to your project dependencies:
 
-- Ensure that your app has the necessary [permissions declared](https://flet.dev/docs/publish#permissions).
+- Using `uv`:
+    ```bash
+    uv add flet-permission-handler
+    ```
+
+- Using `pip`:
+    ```bash
+    pip install flet-permission-handler
+    ```
+    After this, you will have to manually add this package to your `requirements.txt` or `pyproject.toml`.
+
+- Using `poetry`:
+    ```bash
+    poetry add flet-permission-handler
+    ```
 
 ## Examples
 
-For examples, see [this](https://github.com/flet-dev/flet-permission-handler/tree/main/examples)
+For examples, see [this](./examples)

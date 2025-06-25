@@ -4,7 +4,7 @@
 [![downloads](https://static.pepy.tech/badge/flet-permission-handler/month)](https://pepy.tech/project/flet-permission-handler)
 [![license](https://img.shields.io/github/license/flet-dev/flet-permission-handler.svg)](https://github.com/flet-dev/flet-permission-handler/blob/main/LICENSE)
 
-A Flet extension that simplifies working with permissions in your app.
+A [Flet](https://flet.dev) extension that simplifies working with device permissions.
 
 It is based on the [permission_handler](https://pub.dev/packages/permission_handler) Flutter package
 and brings similar functionality to Flet, including:
@@ -41,13 +41,17 @@ To install the `flet-permission-handler` package and add it to your project depe
    ```bash
    pip install flet-permission-handler  # (1)!
    ```
-=== "poetry"
 
+   1. After this, you will have to manually add this package to your `requirements.txt` or `pyproject.toml`.
+
+=== "poetry"
    ```bash
    poetry add flet-permission-handler
    ```
 
-1. After this, you will have to manually add this package to your `requirements.txt` or `pyproject.toml`.
+### Declaring Permissions
+
+Ensure that your app has the necessary [permissions declared](https://flet.dev/docs/publish#permissions).
 
 ## Example
 
@@ -55,5 +59,5 @@ To install the `flet-permission-handler` package and add it to your project depe
 --8<-- "examples/permission_handler_example/src/main.py"
 ``` 
 
-1. The [`PermissionHandler`][flet_permission_handler.permission_handler.PermissionHandler] instance must be added to the
-   page's [`services`](https://flet.dev/docs/controls/page#services) (not `controls`) list to work properly.
+1. The [`PermissionHandler`][(p).] instance must be added to the
+   [`Page.services`](https://flet.dev/docs/controls/page#services) list to work properly.

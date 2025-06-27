@@ -4,39 +4,33 @@ import flet_permission_handler as fph
 
 
 def main(page: ft.Page):
-    page.scroll = ft.ScrollMode.ADAPTIVE
-    page.appbar = ft.AppBar(title=ft.Text("PermissionHandler Tests"))
-    ph = fph.PermissionHandler()
-    page.overlay.append(ph)
+    page.appbar = ft.AppBar(title="PermissionHandler Playground")
 
-    def check_permission(e):
-        o = ph.check_permission(e.control.data)
-        page.add(ft.Text(f"Checked {e.control.data.name}: {o}"))
+    def show_snackbar(message: str):
+        page.show_dialog(ft.SnackBar(ft.Text(message)))
 
-    def request_permission(e):
-        o = ph.request_permission(e.control.data)
-        page.add(ft.Text(f"Requested {e.control.data.name}: {o}"))
+    async def get_permission_status(e: ft.Event[ft.OutlinedButton]):
+        status = await p.get_status_async(fph.Permission.MICROPHONE)
+        show_snackbar(f"Microphone permission status: {status.name}")
 
-    def open_app_settings(e):
-        o = ph.open_app_settings()
-        page.add(ft.Text(f"App Settings: {o}"))
+    async def request_permission(e: ft.Event[ft.OutlinedButton]):
+        status = await p.request_async(fph.Permission.MICROPHONE)
+        show_snackbar(f"Requested microphone permission: {status.name}")
+
+    async def open_app_settings(e: ft.Event[ft.OutlinedButton]):
+        show_snackbar("Opening app settings...")
+        await p.open_app_settings_async()
+
+    p = fph.PermissionHandler()
+    page.services.append(p)  # (1)!
 
     page.add(
+        ft.OutlinedButton("Open app settings", on_click=open_app_settings),
+        ft.OutlinedButton("Request Microphone permission", on_click=request_permission),
         ft.OutlinedButton(
-            "Check Microphone Permission",
-            data=fph.PermissionType.MICROPHONE,
-            on_click=check_permission,
-        ),
-        ft.OutlinedButton(
-            "Request Microphone Permission",
-            data=fph.PermissionType.MICROPHONE,
-            on_click=request_permission,
-        ),
-        ft.OutlinedButton(
-            "Open App Settings",
-            on_click=open_app_settings,
+            "Get Microphone permission status", on_click=get_permission_status
         ),
     )
 
 
-ft.app(main)
+ft.run(main)

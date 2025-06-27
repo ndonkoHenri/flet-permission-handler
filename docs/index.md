@@ -13,10 +13,6 @@ and brings similar functionality to Flet, including:
 - Checking the current permission status (e.g., granted, denied)
 - Redirecting users to system settings to manually grant permissions
 
-## Documentation
-
-Detailed documentation to this package can be found [here](https://flet-dev.github.io/flet-permission-handler/).
-
 ## Platform Support
 
 This package supports the following platforms:
@@ -30,26 +26,38 @@ This package supports the following platforms:
 | Android  |     ✅     |
 | Web      |     ✅     |
 
-## Installation
+## Usage
+
+### Installation
 
 To install the `flet-permission-handler` package and add it to your project dependencies:
 
-- Using `uv`:
-    ```bash
-    uv add flet-permission-handler
-    ```
+=== "uv"
+   ```bash
+   uv add flet-permission-handler
+   ```
 
-- Using `pip`:
-    ```bash
-    pip install flet-permission-handler
-    ```
-    After this, you will have to manually add this package to your `requirements.txt` or `pyproject.toml`.
+=== "pip"
+   ```bash
+   pip install flet-permission-handler  # (1)!
+   ```
 
-- Using `poetry`:
-    ```bash
-    poetry add flet-permission-handler
-    ```
+   1. After this, you will have to manually add this package to your `requirements.txt` or `pyproject.toml`.
 
-## Examples
+=== "poetry"
+   ```bash
+   poetry add flet-permission-handler
+   ```
 
-For examples, see [this](./examples)
+### Declaring Permissions
+
+Ensure that your app has the necessary [permissions declared](https://flet.dev/docs/publish#permissions).
+
+## Example
+
+```python title="main.py"
+--8<-- "examples/permission_handler_example/src/main.py"
+``` 
+
+1. The [`PermissionHandler`][(p).] instance must be added to the
+   [`Page.services`](https://flet.dev/docs/controls/page#services) list to work properly.

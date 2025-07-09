@@ -38,6 +38,7 @@ docs = [
     "mkdocs-section-index>=0.3.10",
     "griffe-modernized-annotations>=1.0.8",
     "pygments>=2.16",
+    "backrefs==5.8",
 ]
 
 [build-system]

@@ -7,7 +7,7 @@ __all__ = [
 
 
 class PermissionStatus(Enum):
-    """Defines the state of a [`Permission`][flet_permission_handler.Permission]."""
+    """Defines the state of a [`Permission`][(p).]."""
 
     GRANTED = "granted"
     """

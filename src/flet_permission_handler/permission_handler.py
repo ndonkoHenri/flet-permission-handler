@@ -16,9 +16,12 @@ class PermissionHandler(ft.Service):
 
     Note:
         Currently only supported on Android, iOS, Windows, and Web platforms.
+    Attributes:
+        foo: Description for me.
     Raises:
         FletUnsupportedPlatformException: If the platform is not supported.
     """
+    foo: Optional[Union[int, Tuple[float, float]]]
 
     def before_update(self):
         super().before_update()

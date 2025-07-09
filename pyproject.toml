@@ -28,15 +28,15 @@ dev = [
 ]
 docs = [
     "mkdocs",
-    "mkdocs-material",
-    "mkdocstrings[python]",
-    "mkdocstrings-python-xref",
-    "mike",
+    "mkdocs-material==9.6.14",
+    "mkdocstrings-python>=1.16.12",
+    "mkdocstrings-python-xref>=1.16.3",
+    "mike>=2.1.3",
     "markdown>=3.6",
-    "pymdown-extensions",
-    "mkdocs-glightbox",
-    "mkdocs-section-index",
-    "griffe-modernized-annotations",
+    "pymdown-extensions==10.16",
+    "mkdocs-glightbox>=0.4.0",
+    "mkdocs-section-index>=0.3.10",
+    "griffe-modernized-annotations>=1.0.8",
     "pygments>=2.16",
 ]
 

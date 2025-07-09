@@ -47,7 +47,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version-file: "pyproject.toml"  # Match Python version with project config
+          python-version: "3.13.3"  # Match Python version with project config
 
       - name: Install dependencies
         run: |
